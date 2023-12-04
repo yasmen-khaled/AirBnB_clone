@@ -1,1 +1,1 @@
-AirBnB clone Project for Holberton school Software Engineering
+AirBnB clone Project for alx Software Engineering
