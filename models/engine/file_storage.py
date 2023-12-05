@@ -11,7 +11,6 @@ class FileStorage():
     __objects = {}
 
     """______ all - method  selected all objects _______"""
-
     def all(self):
 
         return FileStorage.__objects
