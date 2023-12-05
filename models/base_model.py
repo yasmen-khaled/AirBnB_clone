@@ -9,12 +9,20 @@ class BaseModel:
         in this project
     """
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         """init function the main function"""
 
         self.id = str(u.uuid4())
         self.created_at = d.datetime.today()
         self.updated_at = d.datetime.today()
+        sf = "%Y-%m-%dT%H:%M:%S.%f"
+
+        if kwargs and len(kwargs) != 0:
+            for key, value  in kwargs.items():
+                if key == "created_at" or key == "updated_at":
+                    self.__dict__[key] = d.datetime.strptime(value, sf)
+                else:
+                    self.__dict__[key] = value
 
     def save(self):
         """save function to update the updated"""
