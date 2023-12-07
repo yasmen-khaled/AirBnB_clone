@@ -1,6 +1,6 @@
-#!/user/bin/python3
+#!/usr/bin/python3
 """Modules."""
-import uuid  as u
+import uuid as u
 import datetime as d
 
 
@@ -18,7 +18,7 @@ class BaseModel:
         sf = "%Y-%m-%dT%H:%M:%S.%f"
 
         if kwargs and len(kwargs) != 0:
-            for key, value  in kwargs.items():
+            for key, value in kwargs.items():
                 if key == "created_at" or key == "updated_at":
                     self.__dict__[key] = d.datetime.strptime(value, sf)
                 else:
@@ -30,21 +30,18 @@ class BaseModel:
         self.updated_at = d.datetime.today()
 
     def to_dict(self):
-        """to_dict restore the dict by created 
-            and updated + class(name)
+        """to_dict restore the dict by created
+        and updated + class(name)
         """
 
         re_dict = self.__dict__.copy()
         re_dict["__class__"] = self.__class__.__name__
         re_dict["created_at"] = self.created_at.isoformat()
         re_dict["updated_at"] = self.updated_at.isoformat()
-        
         return re_dict
 
     def __str__(self):
         """str the function format"""
 
         name = self.__class__.__name__
-
         return "[{}] ({}) {}".format(name, self.id, self.__dict__)
-
