@@ -2,6 +2,7 @@
 """Modules."""
 import uuid as u
 import datetime as d
+import models
 
 
 class BaseModel:
@@ -22,12 +23,15 @@ class BaseModel:
                 if key == "created_at" or key == "updated_at":
                     self.__dict__[key] = d.datetime.strptime(value, sf)
                 else:
-                    self.__dict__[key] = value
+                    self.__dict__[key] = valuei
+        else:
+            models.storage.new(self)
 
     def save(self):
         """save function to update the updated"""
 
         self.updated_at = d.datetime.today()
+        models.storage.save()
 
     def to_dict(self):
         """to_dict restore the dict by created
