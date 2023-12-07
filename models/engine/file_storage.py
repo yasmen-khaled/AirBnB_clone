@@ -35,8 +35,8 @@ class FileStorage():
 
             }
         
-        with open(FileStorage.__file_path, 'w') as x:
-            json.dump(creat_dict, x)
+        with open(FileStorage.__file_path, 'w') as output:
+            json.dump(creat_dict, output)
 
         """______reloading - Deserializeing converting from json to py _______"""
 
