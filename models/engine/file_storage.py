@@ -1,46 +1,43 @@
 #!/usr/bin/python3
-
+"""Modules"""
 import json
 import os
 from models.base_model import BaseModel
 from models.user import User
 
+
 class FileStorage():
-   
+    """filestorage class"""
 
     __file_path = "file.json"
     __objects = {}
 
-    """______ all - method  selected all objects _______"""
     def all(self):
+        """all fun  selected all objects"""
 
         return FileStorage.__objects
-    
-    """______ new - method  creating a new  object to __object dict _______"""
 
     def new(self, obj):
+        """new  creating a new object to __object dict"""
 
         new_entry = obj.__class__.__name__ + '.' + obj.id
 
         FileStorage.__objects[new_entry] = obj
- 
-    """______ save - Serializeing converting from py to json _______"""
 
     def save(self):
-    
+        """save Serializeing from py to jso"""
+
         creat_dict = {
-    
+
             obj: FileStorage.__objects[obj].to_dict()
             for obj in FileStorage.__objects.keys()
-
             }
-        
+
         with open(FileStorage.__file_path, 'w') as output:
             json.dump(creat_dict, output)
 
-        """______reloading - Deserializeing converting from json to py _______"""
-
     def reload(self):
+        """reloading  Deserializeing from json to py"""
 
         if FileStorage.__file_path is None:
             return
@@ -52,7 +49,7 @@ class FileStorage():
                 for key in creat_dict.values():
                     class_name = key["__class__"]
                     del key["__class__"]
-                    
+
                     self.new(eval(class_name)(**key))
         except FileNotFoundError:
             return
