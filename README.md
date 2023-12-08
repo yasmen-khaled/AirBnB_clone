@@ -1,1 +1,12 @@
-AirBnB clone Project for alx Software Engineering
+<html>
+<head>
+<h3>
+0x00. AirBnB clone - The console</h3>
+<p>
+Group project
+	Python
+	OOP
+<br>
+</p>
+</head>
+</html>
