@@ -129,7 +129,7 @@ class HBNBCommand(cmd.Cmd):
 
         """_______Updates class name and id__________"""
     def do_update(self, arg):
-        
+
         _list = []
         duble_qout = False
         _inp = ""
@@ -162,7 +162,6 @@ class HBNBCommand(cmd.Cmd):
                 storage.save()
             else:
                 print("** no instance found **")
-    
 
 
 if __name__ == '__main__':
