@@ -159,6 +159,9 @@ class HBNBCommand(cmd.Cmd):
         else:
             _object = "{}.{}".format(_list[0], _list[1])
             if _object in storage.all():
+                instance = storage.all()[_object]
+                attr_name = _inp[2]
+                value = _inp[3]
                 storage.save()
             else:
                 print("** no instance found **")
