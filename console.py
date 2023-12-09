@@ -127,6 +127,43 @@ class HBNBCommand(cmd.Cmd):
                 lis.append(str(ob[k]))
         print(lis)
 
+        """_______Updates class name and id__________"""
+    def do_update(self, arg):
+        
+        _list = []
+        duble_qout = False
+        _inp = ""
+
+        for ch in arg:
+            if ch == ' ' and not duble_qout:
+                _list.append(_inp)
+                _inp = ""
+            elif ch == '"':
+                duble_qout = not duble_qout
+            else:
+                _inp += ch
+
+        if _inp:
+            _list.append(_inp)
+
+        if len(_list) < 1:
+            print("** class name missing **")
+        elif not self.do_check(_list[0]):
+            return
+        elif len(_list) < 2:
+            print("** instance id missing **")
+        elif len(_list) < 3:
+            print("** attribute name missing **")
+        elif len(_list) < 4:
+            print("** value missing **")
+        else:
+            _object = "{}.{}".format(_list[0], _list[1])
+            if _object in storage.all():
+                storage.save()
+            else:
+                print("** no instance found **")
+    
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
