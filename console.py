@@ -109,19 +109,23 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def do_all(self, lin):
-        """do all fun"""
+        """print all"""
 
-        firs = lin.split(lin)
-        lis = []
-        if firs[0] not in HBNBCommand.__cl and len(firs) > 0:
-            print("** class doesn't exist **")
+        ar = lin.split()
+        ob = storage.all()
+        if len(ar) != 0:
+            if ar[0] not in HBNBCommand.__cl:
+                print("** class doesn't exist **")
+                return
+            else:
+                lis = []
+                for k in storage.all():
+                    if ar[0] == ob[k].__class__.__name__:
+                        lis.append(str(ob[k]))
         else:
-            for k in storage.all().values():
-                if len(firs) > 0 and firs[0] == i.__class__.__name__:
-                    lis.append(obj.__str__())
-                elif len(firs) == 0:
-                    lis.append(i.__str__())
-                    print(lis)
+            for k in ob:
+                lis.append(str(ob[k]))
+        print(lis)
 
 
 if __name__ == '__main__':
