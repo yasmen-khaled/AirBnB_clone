@@ -2,6 +2,7 @@
 """Modules"""
 import cmd
 import models
+from models import storage
 from models.amenity import Amenity
 from models.base_model import BaseModel
 from models.city import City
@@ -53,15 +54,15 @@ class HBNBCommand(cmd.Cmd):
             print(eval(firs[0])().id)
             models.storage.save()
 
-    """________show - print class name and id_________"""
+        """__show - print class name and id___"""
 
-     def _show(self, arg):
+    def do_show(self, arg):
 
         _str = arg.split()
         if not arg:
             print("** class name missing **")
             return
-        elif not self._check(_str[0]):
+        elif not self.do_check(_str[0]):
             return
         elif len(_str) < 2:
             print("** instance id missing **")
@@ -76,9 +77,9 @@ class HBNBCommand(cmd.Cmd):
         else:
             print(_dict[_object])
     
-    """_______checks if the class name is exist in the __cl_______"""
+        """__checks if the class name is exist in the __cl__"""
 
-    def _check(self, class_name):
+    def do_check(self, class_name):
         if class_name not in HBNBCommand.__cl:
             print("** class doesn't exist **")
             return False
