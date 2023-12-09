@@ -128,13 +128,13 @@ class HBNBCommand(cmd.Cmd):
         print(lis)
 
         """_______Updates class name and id__________"""
-    def do_update(self, arg):
+    def do_update(self, lin):
 
         _list = []
         duble_qout = False
         _inp = ""
 
-        for ch in arg:
+        for ch in lin:
             if ch == ' ' and not duble_qout:
                 _list.append(_inp)
                 _inp = ""
