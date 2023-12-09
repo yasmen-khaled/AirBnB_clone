@@ -76,6 +76,32 @@ class HBNBCommand(cmd.Cmd):
             return
         else:
             print(_dict[_object])
+
+            """__destroying data 3:<___"""
+            
+        def do_destroy(self, arg):
+
+        _str = arg.split()
+        if not arg:
+            print("** class name missing **")
+            return
+        elif not self.do_check(_str[0]):
+            return
+        elif len(_str) < 2:
+            print("** instance id missing **")
+            return
+
+        _object = _str[0] + '.' + _str[1]
+        _dict = storage.all()
+
+        if _object not in _dict:
+            print("** no instance found **")
+            return
+        else:
+            if _dict[_object] is not None:
+                del _dict[_object]
+                storage.save()
+                
     
         """__checks if the class name is exist in the __cl__"""
 
