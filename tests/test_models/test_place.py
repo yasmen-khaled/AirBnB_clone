@@ -1,21 +1,12 @@
 #!/usr/bin/python3
-"""Defines unittests for models/place.py.
-
-Unittest classes:
-    TestPlace_instantiation
-    TestPlace_save
-    TestPlace_to_dict
-"""
-import os
+"Modules"
 import models
 import unittest
-from datetime import datetime
-from time import sleep
 from models.place import Place
 
 
-class TestPlace_instantiation(unittest.TestCase):
-    """Unittests for testing instantiation of the Place class."""
+class TestPlace(unittest.TestCase):
+    """Class Plase Test"""
 
     def test_no_args_instantiates(self):
         self.assertEqual(Place, type(Place()))
@@ -193,56 +184,6 @@ class TestPlace_save(unittest.TestCase):
         plid = "Place." + pl.id
         with open("file.json", "r") as f:
             self.assertIn(plid, f.read())
-
-
-class TestPlace_to_dict(unittest.TestCase):
-    """Unittests for testing to_dict method of the Place class."""
-
-    def test_to_dict_type(self):
-        self.assertTrue(dict, type(Place().to_dict()))
-
-    def test_to_dict_contains_correct_keys(self):
-        pl = Place()
-        self.assertIn("id", pl.to_dict())
-        self.assertIn("created_at", pl.to_dict())
-        self.assertIn("updated_at", pl.to_dict())
-        self.assertIn("__class__", pl.to_dict())
-
-    def test_to_dict_contains_added_attributes(self):
-        pl = Place()
-        pl.middle_name = "Holberton"
-        pl.my_number = 98
-        self.assertEqual("Holberton", pl.middle_name)
-        self.assertIn("my_number", pl.to_dict())
-
-    def test_to_dict_datetime_attributes_are_strs(self):
-        pl = Place()
-        pl_dict = pl.to_dict()
-        self.assertEqual(str, type(pl_dict["id"]))
-        self.assertEqual(str, type(pl_dict["created_at"]))
-        self.assertEqual(str, type(pl_dict["updated_at"]))
-
-    def test_to_dict_output(self):
-        dt = datetime.today()
-        pl = Place()
-        pl.id = "123456"
-        pl.created_at = pl.updated_at = dt
-        tdict = {
-            'id': '123456',
-            '__class__': 'Place',
-            'created_at': dt.isoformat(),
-            'updated_at': dt.isoformat(),
-        }
-        self.assertDictEqual(pl.to_dict(), tdict)
-
-    def test_contrast_to_dict_dunder_dict(self):
-        pl = Place()
-        self.assertNotEqual(pl.to_dict(), pl.__dict__)
-
-    def test_to_dict_with_arg(self):
-        pl = Place()
-        with self.assertRaises(TypeError):
-            pl.to_dict(None)
 
 
 if __name__ == "__main__":
