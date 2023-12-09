@@ -55,30 +55,26 @@ class HBNBCommand(cmd.Cmd):
 
     """________show - print class name and id_________"""
 
-    def _show(self, arg):
+     def _show(self, arg):
 
         _str = arg.split()
-
         if not arg:
             print("** class name missing **")
             return
-        
         elif not self._check(_str[0]):
             return
-        
         elif len(_str) < 2:
             print("** instance id missing **")
             return
 
-        _objects = _str[0] + '.' + _str[1]
-
+        _object = _str[0] + '.' + _str[1]
         _dict = storage.all()
 
-        if _objects not in _dict:
+        if _object not in _dict:
             print("** no instance found **")
             return
         else:
-            print(_dict[_objects])
+            print(_dict[_object])
     
     """_______checks if the class name is exist in the __cl_______"""
 
