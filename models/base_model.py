@@ -1,27 +1,25 @@
 #!/usr/bin/python3
 """Modules."""
-import uuid as u
-import datetime as d
+from uuid import uuid4
+from datetime import datetime
 import models
 
 
 class BaseModel:
-    """class base modle first class the parent
-        in this project
-    """
+    """class base modle first class the parent"""
 
     def __init__(self, *args, **kwargs):
         """init function the main function"""
 
-        self.id = str(u.uuid4())
-        self.created_at = d.datetime.today()
-        self.updated_at = d.datetime.today()
+        self.id = str(uuid4())
+        self.created_at = datetime.today()
+        self.updated_at = datetime.today()
         sf = "%Y-%m-%dT%H:%M:%S.%f"
 
         if kwargs and len(kwargs) != 0:
             for key, value in kwargs.items():
                 if key == "created_at" or key == "updated_at":
-                    self.__dict__[key] = d.datetime.strptime(value, sf)
+                    self.__dict__[key] = datetime.strptime(value, sf)
                 else:
                     self.__dict__[key] = value
         else:
@@ -30,7 +28,7 @@ class BaseModel:
     def save(self):
         """save function to update the updated"""
 
-        self.updated_at = d.datetime.today()
+        self.updated_at = datetime.today()
         models.storage.save()
 
     def to_dict(self):
