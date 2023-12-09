@@ -77,9 +77,7 @@ class HBNBCommand(cmd.Cmd):
         else:
             print(_dict[_object])
 
-            """__destroying data 3:<___"""
-            
-        def do_destroy(self, arg):
+    def do_destroy(self, arg):
 
         _str = arg.split()
         if not arg:
@@ -101,11 +99,10 @@ class HBNBCommand(cmd.Cmd):
             if _dict[_object] is not None:
                 del _dict[_object]
                 storage.save()
-                
-    
-        """__checks if the class name is exist in the __cl__"""
 
     def do_check(self, class_name):
+        """__checks if the class name is exist in the __cl__"""
+
         if class_name not in HBNBCommand.__cl:
             print("** class doesn't exist **")
             return False
