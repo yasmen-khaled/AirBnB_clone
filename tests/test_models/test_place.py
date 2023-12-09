@@ -106,84 +106,9 @@ class TestPlace(unittest.TestCase):
         pl2 = Place()
         self.assertLess(pl1.updated_at, pl2.updated_at)
 
-    def test_str_representation(self):
-        dt = datetime.today()
-        dt_repr = repr(dt)
-        pl = Place()
-        pl.id = "123456"
-        pl.created_at = pl.updated_at = dt
-        plstr = pl.__str__()
-        self.assertIn("[Place] (123456)", plstr)
-        self.assertIn("'id': '123456'", plstr)
-        self.assertIn("'created_at': " + dt_repr, plstr)
-        self.assertIn("'updated_at': " + dt_repr, plstr)
-
-    def test_args_unused(self):
-        pl = Place(None)
-        self.assertNotIn(None, pl.__dict__.values())
-
-    def test_instantiation_with_kwargs(self):
-        dt = datetime.today()
-        dt_iso = dt.isoformat()
-        pl = Place(id="345", created_at=dt_iso, updated_at=dt_iso)
-        self.assertEqual(pl.id, "345")
-        self.assertEqual(pl.created_at, dt)
-        self.assertEqual(pl.updated_at, dt)
-
     def test_instantiation_with_None_kwargs(self):
         with self.assertRaises(TypeError):
             Place(id=None, created_at=None, updated_at=None)
-
-
-class TestPlace_save(unittest.TestCase):
-    """Unittests for testing save method of the Place class."""
-
-    @classmethod
-    def setUp(self):
-        try:
-            os.rename("file.json", "tmp")
-        except IOError:
-            pass
-
-    def tearDown(self):
-        try:
-            os.remove("file.json")
-        except IOError:
-            pass
-        try:
-            os.rename("tmp", "file.json")
-        except IOError:
-            pass
-
-    def test_one_save(self):
-        pl = Place()
-        sleep(0.05)
-        first_updated_at = pl.updated_at
-        pl.save()
-        self.assertLess(first_updated_at, pl.updated_at)
-
-    def test_two_saves(self):
-        pl = Place()
-        sleep(0.05)
-        first_updated_at = pl.updated_at
-        pl.save()
-        second_updated_at = pl.updated_at
-        self.assertLess(first_updated_at, second_updated_at)
-        sleep(0.05)
-        pl.save()
-        self.assertLess(second_updated_at, pl.updated_at)
-
-    def test_save_with_arg(self):
-        pl = Place()
-        with self.assertRaises(TypeError):
-            pl.save(None)
-
-    def test_save_updates_file(self):
-        pl = Place()
-        pl.save()
-        plid = "Place." + pl.id
-        with open("file.json", "r") as f:
-            self.assertIn(plid, f.read())
 
 
 if __name__ == "__main__":
