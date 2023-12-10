@@ -95,7 +95,7 @@ class HBNBCommand(cmd.Cmd):
                 storage.save()
 
     def do_check(self, class_name):
-        """__checks if the class name is exist in the __cl__"""
+        """_checks if the class name is exist in the __cl_"""
 
         if class_name not in HBNBCommand.__cl:
             print("** class doesn't exist **")
