@@ -1,88 +1,85 @@
 #!/usr/bin/python3
-"Modules"
+"""Modules"""
+import os
 import models
 import unittest
+from datetime import datetime
+from time import sleep
 from models.city import City
 
 
 class TestCity(unittest.TestCase):
-    """Class Plase Test"""
+    """Unittests City class"""
 
-    def test_no(self):
+    def test_a(self):
         self.assertEqual(City, type(City()))
 
-    def test_new(self):
+    def test_b(self):
         self.assertIn(City(), models.storage.all().values())
 
-    def test_id(self):
+    def test_c(self):
         self.assertEqual(str, type(City().id))
 
-    def test_city(self):
-        li = City()
-        self.assertEqual(str, type(City.city_id))
-        self.assertIn("city_id", dir(li))
-        self.assertNotIn("city_id", li.__dict__)
+    def test_d(self):
+        self.assertEqual(datetime, type(City().created_at))
 
-    def test_user(self):
-        li = City()
-        self.assertEqual(str, type(City.user_id))
-        self.assertIn("user_id", dir(li))
-        self.assertNotIn("user_id", li.__dict__)
+    def test_e(self):
+        self.assertEqual(datetime, type(City().updated_at))
 
-    def test_name(self):
-        li = City()
+    def test_f(self):
+        cl = City()
+        self.assertEqual(str, type(City.state_id))
+        self.assertIn("state_id", dir(cl))
+        self.assertNotIn("state_id", cl.__dict__)
+
+    def test_g(self):
+        cl = City()
         self.assertEqual(str, type(City.name))
-        self.assertIn("name", dir(li))
-        self.assertNotIn("name", li.__dict__)
+        self.assertIn("name", dir(cl))
+        self.assertNotIn("name", cl.__dict__)
+
+    def test_h(self):
+        cl1 = City()
+        cl2 = City()
+        self.assertNotEqual(cl1.id, cl2.id)
+
+    def test_i(self):
+        cl1 = City()
+        sleep(0.05)
+        cl2 = City()
+        self.assertLess(cl1.created_at, cl2.created_at)
+
+    def test_j(self):
+        cl1 = City()
+        sleep(0.05)
+        cl2 = City()
+        self.assertLess(cl1.updated_at, cl2.updated_at)
+
+    def test_k(self):
+        dt = datetime.today()
+        dt_repr = repr(dt)
+        cy = City()
+        cy.id = "123456"
+        cy.created_at = cy.updated_at = dt
+        cystr = cy.__str__()
+        self.assertIn("[City] (123456)", cystr)
+        self.assertIn("'id': '123456'", cystr)
+        self.assertIn("'created_at': " + dt_repr, cystr)
+        self.assertIn("'updated_at': " + dt_repr, cystr)
+
+    def test_l(self):
+        cl = City(None)
+        self.assertNotIn(None, cl.__dict__.values())
+
+    def test_m(self):
+        dl = datetime.today()
+        dl_iso = dt.isoformat()
+        cl = City(id="345", created_at=dl_iso, updated_at=dl_iso)
+        self.assertEqual(cl.id, "345")
+        self.assertEqual(cl.created_at, dl)
+        self.assertEqual(cl.updated_at, dl)
 
     def test_n(self):
-        li = City()
-        self.assertEqual(int, type(City.number_rooms))
-        self.assertIn("number_rooms", dir(li))
-        self.assertNotIn("number_rooms", li.__dict__)
-
-    def test_number(self):
-        pl = City()
-        self.assertEqual(int, type(City.number_bathrooms))
-        self.assertIn("number_bathrooms", dir(pl))
-        self.assertNotIn("number_bathrooms", pl.__dict__)
-
-    def test_longitude(self):
-        li = City()
-        self.assertEqual(float, type(City.longitude))
-        self.assertIn("longitude", dir(li))
-        self.assertNotIn("longitude", li.__dict__)
-
-    def test_attribute(self):
-        li = City()
-        self.assertEqual(list, type(City.amenity_ids))
-        self.assertIn("amenity_ids", dir(li))
-        self.assertNotIn("amenity_ids", li.__dict__)
-
-    def test_unique(self):
-        k = City()
-        li = City()
-        self.assertNotEqual(k.id, li.id)
-        
-    def test_max(self):
-        pl = City()
-        self.assertEqual(int, type(City.max_guest))
-        self.assertIn("max_guest", dir(pl))
-        self.assertNotIn("max_guest", pl.__dict__)
-
-    def test_price(self):
-        li = City()
-        self.assertEqual(int, type(City.price_by_night))
-        self.assertIn("price_by_night", dir(li))
-        self.assertNotIn("price_by_night", li.__dict__)
-
-    def test_latitude(self):
-        li = City()
-        self.assertEqual(float, type(City.latitude))
-        self.assertIn("latitude", dir(li))
-        self.assertNotIn("latitude", li.__dict__)
-
-    def test_instantiation(self):
         with self.assertRaises(TypeError):
             City(id=None, created_at=None, updated_at=None)
 
