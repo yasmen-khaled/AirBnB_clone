@@ -57,6 +57,8 @@ class HBNBCommand(cmd.Cmd):
         """__show - print class name and id___"""
 
     def do_show(self, lin):
+        """to show"""
+
         argl = lin.split()
         _obj = storage.all()
         if len(argl) == 0:
@@ -71,6 +73,7 @@ class HBNBCommand(cmd.Cmd):
             print(_obj["{}.{}".format(argl[0], argl[1])])
 
     def do_destroy(self, lin):
+        """to destroy"""
 
         _str = lin.split()
         if not lin:
@@ -120,8 +123,8 @@ class HBNBCommand(cmd.Cmd):
                 lis.append(str(ob[k]))
         print(lis)
 
-        """_______Updates class name and id__________"""
     def do_update(self, lin):
+        """_______Updates class name and id__________"""
 
         _list = []
         duble_qout = False
