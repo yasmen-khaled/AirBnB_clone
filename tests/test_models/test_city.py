@@ -1,88 +1,68 @@
 #!/usr/bin/python3
 """Modules"""
-import os
-import models
 import unittest
-from datetime import datetime
-from time import sleep
 from models.city import City
+from models.base_model import BaseModel
 
 
-class TestCity(unittest.TestCase):
-    """Unittests City class"""
+class TestCity_F(unittest.TestCase):
+    """test for city class"""
 
-    def test_a(self):
-        self.assertEqual(City, type(City()))
+    def setUp(self):
+        self.city = City()
 
-    def test_b(self):
-        self.assertIn(City(), models.storage.all().values())
+    def tearDown(self):
+        del self.city
 
-    def test_c(self):
-        self.assertEqual(str, type(City().id))
+    def test_inher(self):
+        self.assertIsInstance(self.city, BaseModel)
 
-    def test_d(self):
-        self.assertEqual(datetime, type(City().created_at))
+    def test_att(self):
+        self.assertTrue(hasattr(self.city, 'id'))
+        self.assertTrue(hasattr(self.city, 'created_at'))
+        self.assertTrue(hasattr(self.city, 'updated_at'))
+        self.assertTrue(hasattr(self.city, 'state_id'))
+        self.assertTrue(hasattr(self.city, 'name'))
 
-    def test_e(self):
-        self.assertEqual(datetime, type(City().updated_at))
+    def test_def(self):
+        self.assertEqual(self.city.state_id, "")
+        self.assertEqual(self.city.name, "")
 
-    def test_f(self):
-        cl = City()
-        self.assertEqual(str, type(City.state_id))
-        self.assertIn("state_id", dir(cl))
-        self.assertNotIn("state_id", cl.__dict__)
+    def test_st(self):
+        expected_output = f"[City] ({self.city.id}) {self.city.__dict__}"
+        self.assertEqual(str(self.city), expected_output)
 
-    def test_g(self):
-        cl = City()
-        self.assertEqual(str, type(City.name))
-        self.assertIn("name", dir(cl))
-        self.assertNotIn("name", cl.__dict__)
+    def test_empty_state_id_and_name(self):
+        self.city.state_id = "CA"
+        self.city.name = "San Francisco"
+        self.assertEqual(self.city.state_id, "CA")
+        self.assertEqual(self.city.name, "San Francisco")
 
-    def test_h(self):
-        cl1 = City()
-        cl2 = City()
-        self.assertNotEqual(cl1.id, cl2.id)
+    def test_id_type(self):
+        self.city.state_id = 123
+        self.assertEqual(self.city.state_id, 123)
 
-    def test_i(self):
-        cl1 = City()
-        sleep(0.05)
-        cl2 = City()
-        self.assertLess(cl1.created_at, cl2.created_at)
+    def test_name_type(self):
+        self.city.name = 123
+        self.assertEqual(self.city.name, 123)
+        
+    def test_to(self):
+        expected_dict = {
+            'id': self.city.id,
+            'created_at': self.city.created_at.isoformat(),
+            'updated_at': self.city.updated_at.isoformat(),
+            '__class__': 'City'
+        }
+        self.assertEqual(self.city.to_dict(), expected_dict)
 
-    def test_j(self):
-        cl1 = City()
-        sleep(0.05)
-        cl2 = City()
-        self.assertLess(cl1.updated_at, cl2.updated_at)
+    def test_state_id(self):
+        self.city.state_id = ""
+        self.assertEqual(self.city.state_id, "")
 
-    def test_k(self):
-        dt = datetime.today()
-        dt_repr = repr(dt)
-        cy = City()
-        cy.id = "123456"
-        cy.created_at = cy.updated_at = dt
-        cystr = cy.__str__()
-        self.assertIn("[City] (123456)", cystr)
-        self.assertIn("'id': '123456'", cystr)
-        self.assertIn("'created_at': " + dt_repr, cystr)
-        self.assertIn("'updated_at': " + dt_repr, cystr)
-
-    def test_l(self):
-        cl = City(None)
-        self.assertNotIn(None, cl.__dict__.values())
-
-    def test_m(self):
-        dl = datetime.today()
-        dl_iso = dl.isoformat()
-        cl = City(id="345", created_at=dl_iso, updated_at=dl_iso)
-        self.assertEqual(cl.id, "345")
-        self.assertEqual(cl.created_at, dl)
-        self.assertEqual(cl.updated_at, dl)
-
-    def test_n(self):
-        with self.assertRaises(TypeError):
-            City(id=None, created_at=None, updated_at=None)
+    def testempty_name(self):
+        self.city.name = ""
+        self.assertEqual(self.city.name, "")
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     unittest.main()
