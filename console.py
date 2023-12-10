@@ -56,9 +56,9 @@ class HBNBCommand(cmd.Cmd):
 
         """__show - print class name and id___"""
 
-    def do_show(self, arg):
+    def do_show(self, lin):
 
-        _str = arg.split()
+        _str = lin.split()
         if not arg:
             print("** class name missing **")
             return
