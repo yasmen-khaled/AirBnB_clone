@@ -71,7 +71,7 @@ class HBNBCommand(cmd.Cmd):
             print(_obj["{}.{}".format(argl[0], argl[1])])
 
     def do_destroy(self, lin):
-        """to destroy"""
+        """_to destroy_"""
 
         _str = lin.split()
         if not lin:
