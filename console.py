@@ -2,7 +2,6 @@
 """Modules"""
 import cmd
 import models
-from shlex import split
 from models import storage
 from models.amenity import Amenity
 from models.base_model import BaseModel
