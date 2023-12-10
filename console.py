@@ -57,25 +57,18 @@ class HBNBCommand(cmd.Cmd):
         """__show - print class name and id___"""
 
     def do_show(self, lin):
-
-        _str = lin.split()
-        if not lin:
+        argl = lin.split()
+        _obj = storage.all()
+        if len(argl) == 0:
             print("** class name missing **")
-            return
-        elif not self.do_check(_str[0]):
-            return
-        elif len(_str) < 2:
+        elif argl[0] not in HBNBCommand.__cl:
+            print("** class doesn't exist **")
+        elif len(argl) == 1:
             print("** instance id missing **")
-            return
-
-        _object = _str[0] + '.' + _str[1]
-        _dict = storage.all()
-
-        if _object not in _dict:
+        elif "{}.{}".format(argl[0], argl[1]) not in _obj:
             print("** no instance found **")
-            return
         else:
-            print(_dict[_object])
+            print(_obj["{}.{}".format(argl[0], argl[1])])
 
     def do_destroy(self, lin):
 
@@ -159,9 +152,21 @@ class HBNBCommand(cmd.Cmd):
         else:
             _object = "{}.{}".format(_list[0], _list[1])
             if _object in storage.all():
+                insta = storage.all()[_object]
+                attr_name = _list[2]
+                val = _list[3]
+                setattr(insta, attr_name, val)
                 storage.save()
             else:
                 print("** no instance found **")
+
+    def do_count(self, class_name):
+        arg = class_name.split(class_name)
+        _count = 0
+        for _ob in storage.all().values():
+            if class_name == _ob.__class__.__name__:
+                _count += 1
+        print(_count)
 
 
 if __name__ == '__main__':
