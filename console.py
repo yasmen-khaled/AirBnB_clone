@@ -161,6 +161,8 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
 
     def do_count(self, lin):
+        """do count"""
+
         arg = lin.split(lin)
         _count = 0
         for _ob in storage.all().values():
