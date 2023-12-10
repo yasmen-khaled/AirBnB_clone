@@ -63,7 +63,7 @@ class TestPlace(unittest.TestCase):
         k = Place()
         li = Place()
         self.assertNotEqual(k.id, li.id)
-        
+
     def test_max(self):
         pl = Place()
         self.assertEqual(int, type(Place.max_guest))
