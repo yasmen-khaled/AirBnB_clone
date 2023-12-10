@@ -73,7 +73,7 @@ class TestCity(unittest.TestCase):
 
     def test_m(self):
         dl = datetime.today()
-        dl_iso = dt.isoformat()
+        dl_iso = dl.isoformat()
         cl = City(id="345", created_at=dl_iso, updated_at=dl_iso)
         self.assertEqual(cl.id, "345")
         self.assertEqual(cl.created_at, dl)
