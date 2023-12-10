@@ -122,7 +122,7 @@ class HBNBCommand(cmd.Cmd):
         print(lis)
 
     def do_update(self, lin):
-        """_______Updates class name and id__________"""
+        """______Updates class name and id_______"""
 
         _list = []
         duble_qout = False
