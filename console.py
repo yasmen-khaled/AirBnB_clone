@@ -54,8 +54,6 @@ class HBNBCommand(cmd.Cmd):
             print(eval(firs[0])().id)
             models.storage.save()
 
-        """__show - print class name and id___"""
-
     def do_show(self, lin):
         """to show"""
 
