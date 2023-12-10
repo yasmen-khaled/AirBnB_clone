@@ -13,7 +13,7 @@ from models.user import User
 
 
 class HBNBCommand(cmd.Cmd):
-    """class for consolo in airbnb"""
+    """_class for consolo in airbnb_"""
 
     prompt = "(hbnb) "
     __cl = {
