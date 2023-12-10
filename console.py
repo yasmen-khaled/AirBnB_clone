@@ -33,7 +33,7 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def do_quit(self, lin):
-        """Quit command to exit the program"""
+        """_Quit command to exit the program_"""
 
         return True
 
