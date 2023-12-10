@@ -45,7 +45,7 @@ class TestCity_F(unittest.TestCase):
     def test_name_type(self):
         self.city.name = 123
         self.assertEqual(self.city.name, 123)
-        
+
     def test_to(self):
         expected_dict = {
             'id': self.city.id,
