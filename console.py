@@ -154,7 +154,7 @@ class HBNBCommand(cmd.Cmd):
             if _object in storage.all():
                 insta = storage.all()[_object]
                 attr_name = _list[2]
-                val = _list[3]
+                val = _list[3][1:-1]
                 setattr(insta, attr_name, val)
                 storage.save()
             else:
